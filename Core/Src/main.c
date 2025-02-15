@@ -118,6 +118,7 @@ volatile uint16_t adc_buffer[5];
 uint8_t Vcom;
 uint8_t Line_cnt=0;
 uint8_t sharpmem_buffer[400 * 240 / 8];
+uint8_t rotation = 0;
 volatile uint16_t DAC_test = 0;
 volatile uint16_t cnt_pol = 0;
 
@@ -338,9 +339,10 @@ void init_buffer(){
 		  writeLine(x1_mapped, y1_mapped, x2_mapped, y2_mapped, 0);
 	  }
 
-	  drawString(120,205,"Output Voltage [V]", 0, 1, 1, 1);
-	  //drawString(40,220,"Output Current [A]", 0, 1, 1, 1);
-
+	  drawString(120,210,"Output Voltage [V]", 0, 1, 1, 1);
+	  rotation = 3;
+	  drawString(60,25,"Output Current [mA]", 0, 1, 1, 1);
+	  rotation = 0;
 	  //writeLine(19)
 	  /*drawPixel(101,100,0);
 	  writeLine(100,100,150,150,0);
@@ -369,6 +371,25 @@ void clearDisplay() {
 }
 
 void drawPixel(int16_t x, int16_t y, uint16_t color){
+	int16_t t;
+
+    switch (rotation) {
+    case 1:
+      t = x;
+      x = 400 - 1 - y;
+      y = t;
+      break;
+    case 2:
+      x = 400 - 1 - x;
+      y = 240 - 1 - y;
+      break;
+    case 3:
+      t = x;
+      x = y;
+      y = 240 - 1 - t;
+      break;
+    }
+
 	if ((x < 0) || (x >= 400) || (y < 0) || (y >= 240))
 	    return;
 
