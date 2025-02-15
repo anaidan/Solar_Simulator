@@ -310,7 +310,7 @@ void init_buffer(){
 	  writeLine(30, 230, 260, 230, 0); */
 
 	  writeLine(40, 50, 40, 200, 0);
-	  writeLine(40, 200, 320, 200, 0);
+	  writeLine(40, 200, 325, 200, 0);
 
 	 /* for (i = 0; i < 44; i++) {
 		  uint16_t x1_mapped =  map(V_sc[i], 0, 3, 30, 260);
@@ -343,6 +343,19 @@ void init_buffer(){
 	  rotation = 3;
 	  drawString(60,25,"Output Current [mA]", 0, 1, 1, 1);
 	  rotation = 0;
+
+	  drawString(25,48,"50", 0, 1, 1, 1);
+	  drawString(325,205,"5", 0, 1, 1, 1);
+
+	  for(uint8_t k=0; k<10; k++){
+		writeLine(40,185-k*15,45,185-k*15,0);
+	  }
+
+	  for(uint8_t k=0; k<19; k++){
+		writeLine(55+k*15,200,55+k*15,195,0);
+	  }
+
+
 	  //writeLine(19)
 	  /*drawPixel(101,100,0);
 	  writeLine(100,100,150,150,0);
